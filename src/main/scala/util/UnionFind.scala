@@ -17,10 +17,15 @@ class UnionFind(val nodesTree: UnionFind.AbstractNode, val size: Int, val groups
 
 
   def simpleJoin(item1: Int, item2: Int): UnionFind = {
-    join(item1, item2)._1
+    join(item1, item2)
   }
 
-  def join(item1: Int, item2: Int): (UnionFind, GroupNode, Boolean) = {
+  def join(item1: Int, item2: Int): UnionFind = {
+    joinExtended(item1, item2)._1
+  }
+
+
+  def joinExtended(item1: Int, item2: Int): (UnionFind, GroupNode, Boolean) = {
     val gr1 = find(item1)
     val gr2 = find(item2)
     if (gr1 == gr2) (this, gr1, false)
@@ -49,7 +54,6 @@ class UnionFind(val nodesTree: UnionFind.AbstractNode, val size: Int, val groups
   def find(item: Int): GroupNode = {
     val path = getPath(item)
     val node = UnionFind.getByPath(nodesTree, path);
-//    GroupNode(0, 1, 1)
     node match {
       case SingleNode(_, groupId) => if (item != groupId) find(groupId) else throw new Exception("SingleNode references itself: "+node)
       case group @ GroupNode(_, _, _) => group
@@ -168,5 +172,5 @@ object UnionFind {
   }
   case class SingleNode(id: Int, groupId: Int) extends LeafNode
   case class GroupNode(id: Int, groupSize: Int, depth: Int) extends LeafNode
-  case class EmptyNode() extends LeafNode //TODO do we need it?
+  case class EmptyNode() extends LeafNode 
 }

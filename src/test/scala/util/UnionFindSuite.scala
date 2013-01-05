@@ -90,7 +90,7 @@ class UnionFindSuite extends FunSuite with ShouldMatchers with GivenWhenThen {
   }
 
   test("join 2 of 3 items") {
-    val ufJoined = uf3it3gr.join(0, 1)._1;
+    val ufJoined = uf3it3gr.join(0, 1);
     val gr = (for (i <- 0 until 3) yield ufJoined.find(i)).toIndexedSeq
 
     ufJoined.groupsCount should equal (2)
@@ -101,7 +101,7 @@ class UnionFindSuite extends FunSuite with ShouldMatchers with GivenWhenThen {
   }
 
   test("join 3 of 5 items") {
-    val ufJoined = uf5.join(0, 1)._1.join(4, 1)._1
+    val ufJoined = uf5.join(0, 1).join(4, 1)
     val gr = (for (i <- 0 until 5) yield ufJoined.find(i)).toIndexedSeq
 
     ufJoined.groupsCount should equal (3)
@@ -119,7 +119,7 @@ class UnionFindSuite extends FunSuite with ShouldMatchers with GivenWhenThen {
   }
 
   test("join 2 and 3 of 5 items") {
-    val ufJoined = uf5.join(0, 1)._1.join(4, 1)._1.join(2, 3)._1
+    val ufJoined = uf5.join(0, 1).join(4, 1).join(2, 3)
     val gr = (for (i <- 0 until 5) yield ufJoined.find(i)).toIndexedSeq
 
     ufJoined.groupsCount should equal (2)
@@ -137,7 +137,7 @@ class UnionFindSuite extends FunSuite with ShouldMatchers with GivenWhenThen {
   }
 
   test("join 4 of 5 items") {
-    val ufJoined = uf5.join(0, 1)._1.join(4, 3)._1.join(1, 3)._1
+    val ufJoined = uf5.join(0, 1).join(4, 3).join(1, 3)
     val gr = (for (i <- 0 until 5) yield ufJoined.find(i)).toIndexedSeq
 
     ufJoined.groupsCount should equal (2)
